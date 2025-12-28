@@ -1,0 +1,314 @@
+/*Global*/
+$color-main: #ff5e57;
+$grey: #333;
+$light: #eee;
+$font-text: "Cabin", sans-serif;
+$font-header: "Roboto Condensed", sans-serif;
+
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: $font-text;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #3d3d3d;
+    margin: 0;
+    text-align: center;
+    background: $light;
+}
+
+.container{
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+    // border: 2px solid pink;
+}
+
+section{
+    padding: 100px 0;    
+}
+
+.section-title{
+    position: relative;
+    font-family: $font-header;
+    font-size: 36px;
+    margin: 0 0 60px 0;
+    
+    
+    &::after{
+        position: absolute;
+        content: '';
+        bottom: -12px;
+        left: 50%;
+        width: 50px;
+        height: 10px;
+        background: $color-main;
+        transform: translateX(-50%);    
+    }
+}
+
+/*Mixins*/
+@mixin button-style($bg-color,$text-color, $font, $margin){
+    background: $bg-color;
+    color: $text-color;
+    font-family: $font;
+    margin: $margin;
+    
+    border:none;
+    padding: 10px 15px;
+    text-transform: uppercase;
+                  
+    &:hover{
+        cursor: pointer;   
+    }    
+}
+
+@mixin flex-parent($align, $justify, $direction){
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+    flex-direction: $direction;    
+}
+
+/*Splash*/
+.splash{
+    position: relative;
+    height: 100vh;
+    background-image: url(https://i.postimg.cc/8PdWqtBm/splash.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    // border: 2px solid white;
+    
+    .splash-inner{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        color: $light;
+        // border: 2px solid pink;
+    }
+    
+    i{
+        font-size: 30px;
+        line-height: 60px;
+        width: 60px;
+        height: 60px;
+        border-radius:30px;
+        background: $color-main;
+        color: $light;
+    }
+    
+    .page-title{
+        position: relative;
+        font-family: $font-header;
+        font-size: 60px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 48px 0 0 0;
+                  
+        &::after{
+            position: absolute;
+            content: '';
+            bottom: -24px;
+            left: 50%;
+            width: 100px;
+            height: 10px;
+            background: $color-main;
+            transform: translateX(-50%); 
+        }
+    }
+    
+    .page-subtitle{
+        font-size: 18px;      
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 48px 0 0 0;
+    }
+}
+
+/*Intro*/
+.intro{
+    background: $light;    
+    
+    p{
+        font-size: 24px;
+        text-transform: capitalize;
+        width: 70%;
+        margin: 0 auto;
+        padding: 48px 0;
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        color: $grey;
+    }
+}
+
+/*About*/
+.about{
+    background: $grey;
+    color: $light;
+}
+
+/*Skills*/
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    
+    li{
+        position: relative;
+        
+        .skill-image{
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: all 1s;
+                
+                &:hover{
+                    transform: scale(1.1);    
+                }
+            }
+        }
+    }
+}
+
+.skill.right .skill-image{
+    right: 0;
+}
+
+.skill.right .skill-description{
+    padding: 36px 55% 36px 0;
+    text-align: right;
+}
+
+.skill.left .skill-description{
+    padding: 36px 0 36px 55%;
+    text-align: left;
+}
+
+.skill-description{
+    h3{
+        text-transform: uppercase;    
+    }
+    p{
+        font-size: 18px;
+    }
+}
+
+/*Portfolio*/
+.portfolio{
+    
+    .gallery{
+        display: flex;
+        flex-wrap: wrap;
+        
+        .photo-container{
+            position: relative;
+            width: 33.33%;
+            transition: all 1s;
+            
+            img{
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+            
+            .layer{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: rgba(0,0,0,.5);
+                display: none;
+                
+                .wrapper{
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+                
+                h4{
+                    color: $light;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                }
+                
+                button{
+                    @include button-style($color-main, $light, $font-text, 0);
+                }
+            }
+            
+            &:hover .layer{
+                display: block;
+            }
+        } 
+    }
+    
+    button{
+        @include button-style($color-main, $light, $font-text, 30px);   
+    }
+}
+
+
+/*Contact*/
+.contact{
+    background: #242424;  
+    color: $light;
+    
+    .container{
+        @include flex-parent(center, center, column);
+	    
+	    form{
+	        @include flex-parent(center, center, column);
+	        font-family: $font-text;
+	        width: 30%;
+	        min-width: 250px;
+	        
+	        input,
+	        textarea{
+	            font-family: inherit;
+	            margin: 5px;
+	            padding: 10px;
+	            color: $grey;
+	            background: $light;
+	            width: 100%;
+	            border: none;
+	            outline: none;	          	           
+	        }
+	        	        
+	        input[type="submit"]{
+	            width: 30%;	            
+	            background: $color-main;
+	            color: $light;
+	            margin-top: 25px;
+	            
+	            &:hover{
+	                cursor: pointer;    
+	            }
+	        }
+        }
+    }    
+}
+
+/*Footer*/
+.page-footer{
+    background: $grey;;
+    color: $light;
+
+    p{
+        font-size: 12px;
+        margin: 0;
+        padding: 12px;
+    }
+}
