@@ -4,8 +4,10 @@
   "main": "index.js",
   "scripts": {
     "sass": "sass --watch style.scss style.css",
-    "serve": "live-server",
-    "start": "run-p sass serve"
+    "start": "run-p sass preview",
+    "preview": "live-server",
+    "build": "sass style.scss style.min.css --style=compressed",
+    "clean": "rm -f style.css style.min.css style.min.css.map"
   },
   "keywords": [],
   "author": "",
